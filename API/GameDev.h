@@ -23,49 +23,55 @@
     SOFTWARE.
  */
 
-#ifndef __INPUT_KEY_H__
-#define __INPUT_KEY_H__
+#ifndef __GAME_DEV_H__
+#define __GAME_DEV_H__
 
-#include "loader.h"
+/* 
+    Warning! Auto generate, do not edit!
+ */
+
+#define DLL_EXPORT __declspec(dllimport)
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-struct kbdLang
-{
-    LPWSTR key;
-    LPWSTR name;
-};
+/* Header from file: BitMap.h */
+double  DLL_EXPORT   bmpComparable(struct dataComparable*);
+void    DLL_EXPORT   bmpGrayscale(BOOL, BYTE*, BYTE*, int, int, int);
+HBITMAP DLL_EXPORT   hbmpGetWindow(const LPWSTR, const LPWSTR, BOOL, POINT*, HWND*);
+HBITMAP DLL_EXPORT   hbmpCaptureWindow(HWND, POINT*);
+BOOL    DLL_EXPORT   hbmpGrayscale(HBITMAP, BOOL);
+BOOL    DLL_EXPORT   hbmpSave(HBITMAP, const LPWSTR);
+void    DLL_EXPORT   hbmpFree(HBITMAP);
 
+
+/* Header from file: InputKey.h */
 struct kbdLang * DLL_EXPORT keyLangList(void);
 BOOL DLL_EXPORT keySetText(HWND, const LPWSTR, LPWSTR);
 void DLL_EXPORT keySendText(HWND, const LPWSTR, LPWSTR, size_t);
 void DLL_EXPORT keySendTextElement(HWND, const LPWSTR, LPWSTR, size_t, const LPWSTR, const LPWSTR, int);
 
-/*!
-    To C#
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CordPoint
-    {
-        public int x, y;
-    }
-    [StructLayout(LayoutKind.Sequential)]
-    public struct KbdLang
-    {
-        string key;
-        string name;
-    }
+/* Header from file: InputMouse.h */
+void DLL_EXPORT mouseLClickAW(HWND, POINT*, POINT*);
+void DLL_EXPORT mouseRClickAW(HWND, POINT*, POINT*);
+void DLL_EXPORT mouseMClickAW(HWND, POINT*, POINT*);
+void DLL_EXPORT mouseMoveAW(HWND, POINT*);
+void DLL_EXPORT mouseReInitAW(void);
+void DLL_EXPORT mouseLClickBW(HWND, HWND, POINT*, POINT*);
+void DLL_EXPORT mouseRClickBW(HWND, HWND, POINT*, POINT*);
+void DLL_EXPORT mouseMClickBW(HWND, HWND, POINT*, POINT*);
 
-    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-    public static extern void keySendText(IntPtr hwnd, string text, uint sz);
 
-    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-    public static extern void keySendTextElement(IntPtr hwnd, string text, uint sz, string wclass, string wname, int idx);
-
-*/
+/* Header from file: Wnd.h */
+HWND DLL_EXPORT wndChildElement(HWND, const LPWSTR, const LPWSTR, int);
+HWND DLL_EXPORT wndChildLastElement(HWND, const LPWSTR, const LPWSTR);
+HWND DLL_EXPORT wndChildTreeElement(HWND, const LPWSTR, const LPWSTR);
+BOOL DLL_EXPORT wndActivateWindow(HWND, BOOL);
+BOOL DLL_EXPORT wndWakeUpScreen(HWND);
+BOOL DLL_EXPORT wndSleepScreen(void);
 
 #ifdef __cplusplus
 }
