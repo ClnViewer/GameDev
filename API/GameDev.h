@@ -73,6 +73,10 @@ BOOL DLL_EXPORT wndActivateWindow(HWND, BOOL);
 BOOL DLL_EXPORT wndWakeUpScreen(HWND);
 BOOL DLL_EXPORT wndSleepScreen(void);
 
+
+/* Header from file: version.h */
+
+
 #ifdef __cplusplus
 }
 #endif
