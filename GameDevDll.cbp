@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="GameDevDll" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/GameDev" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-std=c++14" />
+					<Add option="-m32" />
+					<Add option="-g" />
+					<Add option="-fopenmp" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-D__InputKB_00010419" />
+				</Compiler>
+				<Linker>
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-static" />
+					<Add option="-m32" />
+					<Add option="-lgomp" />
+					<Add option="-lgdi32" />
+					<Add option="-luser32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/GameDev" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-std=c++14" />
+					<Add option="-m32" />
+					<Add option="-fopenmp" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-D__InputKB_00010419" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-static" />
+					<Add option="-m32" />
+					<Add option="-lgomp" />
+					<Add option="-lgdi32" />
+					<Add option="-luser32" />
+					<Add library="user32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="API/GameDevClass.cpp" />
+		<Unit filename="API/GameDevClass.hpp" />
+		<Unit filename="BitMap.cpp" />
+		<Unit filename="BitMap.h" />
+		<Unit filename="HBitMap.cpp" />
+		<Unit filename="InputDirectX.h" />
+		<Unit filename="InputKey.cpp" />
+		<Unit filename="InputKey.h" />
+		<Unit filename="InputLang.cpp" />
+		<Unit filename="InputMouse.h" />
+		<Unit filename="InputMouseAW.cpp" />
+		<Unit filename="InputMouseBW.cpp" />
+		<Unit filename="Wnd.cpp" />
+		<Unit filename="Wnd.h" />
+		<Unit filename="loader.cpp" />
+		<Unit filename="loader.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,3 +1,13 @@
+
+
+.svn
+*.save
+*.layout
+*.bmarks
+*.depend
+*.sh
+/bin
+
 # Prerequisites
 *.d
 
