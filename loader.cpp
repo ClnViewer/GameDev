@@ -24,6 +24,11 @@
  */
 
 #include "loader.h"
+#include "version.h"
+
+static volatile const char VERSION[] =
+    "Version: " GMD_FULLVERSION_STRING " (" GMD_STATUS "), rev: " \
+    GMD_SVN_REVISION ", " GMD_DATE "-" GMD_MONTH "-" GMD_YEAR;
 
 extern "C" DLL_EXPORT BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
