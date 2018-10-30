@@ -112,7 +112,7 @@ static void __mouseClickAction(HWND hwnd, POINT *p, POINT *e, mouse_click_e ecli
                 (int)(rect.top + __MOUSE_CORD(p->y, e->y))
                );
     __mouseClick(&mi, eclick);
-    Sleep(150);
+    Sleep(500);
     SetForegroundWindow(chwnd);
 }
 
@@ -130,7 +130,7 @@ static void __mouseMoveAction(HWND hwnd, POINT *p)
                 rect.left + p->x + ((rand() % 10) + 1),
                 rect.top + p->y + ((rand() % 10) + 1)
                );
-    Sleep(150);
+    Sleep(500);
     SetForegroundWindow(chwnd);
 }
 
