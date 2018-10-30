@@ -30,6 +30,11 @@ static volatile const char VERSION[] =
     "Version: " GMD_FULLVERSION_STRING " (" GMD_STATUS "), rev: " \
     GMD_SVN_REVISION ", " GMD_DATE "-" GMD_MONTH "-" GMD_YEAR;
 
+const char * DLL_EXPORT DllVersion(void)
+{
+    return (const char*)VERSION;
+}
+
 extern "C" DLL_EXPORT BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
     (void) hinstDLL;

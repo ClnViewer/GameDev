@@ -36,4 +36,6 @@
 
 #define __NELE(a) (sizeof(a) / sizeof(a[0]))
 
+const char * DLL_EXPORT DllVersion(void);
+
 #endif
