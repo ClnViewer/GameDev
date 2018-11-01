@@ -1,0 +1,7 @@
+<Target Name="GameDev" AfterTargets="ResolveReferences" BeforeTargets="FindReferenceAssembliesForReferences">
+  <ItemGroup>
+    <ReferencePath Condition=" '%(FileName)' == '{InteropAssemblyName}' AND '%(ReferencePath.NuGetPackageId)' == '$(MSBuildThisFileName)' ">
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </ReferencePath>
+  </ItemGroup>
+</Target>

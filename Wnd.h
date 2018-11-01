@@ -62,10 +62,11 @@ BOOL DLL_EXPORT wndSleepScreen(void);
     public static extern bool wndActivateWindow(IntPtr hwnd, bool IsRenew);
 
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
-    public static extern bool wndWakeUpWindow(IntPtr hwnd);
+    public static extern bool wndWakeUpScreen(IntPtr hwnd);
 
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool wndSleepScreen();
+
 */
 
 #ifdef __cplusplus

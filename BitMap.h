@@ -84,17 +84,20 @@ void    DLL_EXPORT   hbmpFree(HBITMAP);
     public static extern IntPtr hbmpGetWindow(string wclass, string wname, bool isBW, ref CordPoint winsize, out IntPtr hwnd);
 
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
+    public static extern bool hbmpGrayscale(IntPtr hbmp, bool isBW);
+
+    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
+    public static extern bool hbmpSave(IntPtr hbmp, string fname);
+
+    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void hbmpFree(IntPtr hbmp);
+
+    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
     [return: MarshalAs(UnmanagedType.R8)]
     public static extern double bmpComparable(ref ComparableData data);
 
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
     public static extern void bmpGrayscale(bool m, IntPtr src, IntPtr dst, int x, int y, int t);
-
-    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-    public static extern bool hbmpSave(IntPtr hbmp, string text);
-
-    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl]
-    public static extern void hbmpFree(IntPtr hbmp);
 
 */
 

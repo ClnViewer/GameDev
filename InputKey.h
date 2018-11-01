@@ -60,10 +60,13 @@ void DLL_EXPORT keySendTextElement(HWND, const LPWSTR, LPWSTR, size_t, const LPW
     }
 
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
+    public static extern bool keySetText(IntPtr hwnd, string codepg, string text);
+
+    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
     public static extern void keySendText(IntPtr hwnd, string text, uint sz);
 
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-    public static extern void keySendTextElement(IntPtr hwnd, string text, uint sz, string wclass, string wname, int idx);
+    public static extern void keySendTextElement(IntPtr hwnd, string codepg, string text, uint sz, string wclass, string wname, int idx);
 
 */
 

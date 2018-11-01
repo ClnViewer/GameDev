@@ -55,19 +55,6 @@ void DLL_EXPORT mouseMClickBW(HWND, HWND, POINT*, POINT*);
 /*!
     To C#
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CordPoint
-    {
-        public int x, y;
-    }
-
-    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-    public static extern void keySendText(IntPtr hwnd, string text, uint sz);
-
-    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
-    public static extern void keySendTextElement(IntPtr hwnd, string text, uint sz, string wclass, string wname, int idx);
-
-
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
     public static extern void mouseLClickBW(IntPtr hwnd, IntPtr mwnd, ref CordPoint point, ref CordPoint rectele);
 
@@ -76,7 +63,6 @@ void DLL_EXPORT mouseMClickBW(HWND, HWND, POINT*, POINT*);
 
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
     public static extern void mouseMClickBW(IntPtr hwnd, IntPtr mwnd, ref CordPoint point, ref CordPoint rectele);
-
 
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
     public static extern void mouseLClickAW(IntPtr hwnd, ref CordPoint point, ref CordPoint rectele);

@@ -26,7 +26,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace GameDev
+namespace $rootnamespace$
 {
     public class Data
     {
