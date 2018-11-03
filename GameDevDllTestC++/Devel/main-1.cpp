@@ -175,7 +175,7 @@ HWND tezt(HWND hwnd, LPWSTR wclass, const LPWSTR wname)
     return NULL;
 }
 
-int main(int argc, char *argv[])
+int main()
 {
     wchar_t wwww[] = L"abc.,+-123Петр чайка";
     wchar_t www[] = L"18 is not 22 or yes!";
@@ -184,45 +184,6 @@ int main(int argc, char *argv[])
 
     bool ret1, ret2, check = TRUE;
     HWND hwnd = NULL;
-
-
-    hwnd = wndChildLastElement(NULL, (const LPWSTR)L"Qt5QWindowIcon", (const LPWSTR)L"MEmu");
-    if (hwnd == NULL)
-    {
-        cout << "hwnd is NULL" << endl;
-        return 0;
-    }
-    if (!IsWindow(hwnd))
-    {
-        cout << "hwnd is IsWindow bad" << endl;
-        return 0;
-    }
-    if (argc > 1)
-    {
-        if (argv[1][0] == '1')
-        {
-            cout << "Send window WM_PAINT" << endl;
-            PostMessage(hwnd, WM_PAINT, 0, 0);
-        }
-        else if (argv[1][0] == '2')
-        {
-            cout << "Redraw window" << endl;
-            RedrawWindow(hwnd,NULL,0,0);
-        }
-        else if (argv[1][0] == '3')
-        {
-            cout << "Update window" << endl;
-            UpdateWindow(hwnd);
-        }
-    }
-    else
-    {
-        cout << "Enter: " << argv[0] << " [1 | 2 | 3]" << endl;
-    }
-
-    //
-
-    return 0;
 
     hwnd = GetDesktopWindow();
     if (hwnd == NULL)

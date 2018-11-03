@@ -48,13 +48,16 @@ BOOL DLL_EXPORT wndActivateWindow(HWND hwnd, BOOL isRenew)
         PostMessage(hwnd, WM_SYSCOMMAND, (WPARAM)SC_RESTORE, (LPARAM)0);
         Sleep(15);
     }
-    return TRUE;
+    return RedrawWindow(hwnd, NULL, 0, 0U);
 }
 
 BOOL DLL_EXPORT wndWakeUpScreen(HWND hwnd)
 {
     HWND rwnd = ((hwnd) ? hwnd : GetDesktopWindow());
-    if (!rwnd)
+    if (
+        (!rwnd) ||
+        (!RedrawWindow(rwnd, NULL, 0, 0U))
+       )
         return FALSE;
 
     POINT p = { 100, 500 };
