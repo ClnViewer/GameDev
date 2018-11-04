@@ -175,6 +175,8 @@ HWND tezt(HWND hwnd, LPWSTR wclass, const LPWSTR wname)
     return NULL;
 }
 
+typedef BOOL (*pGetDevicePowerState)(HANDLE, BOOL*);
+
 int main(int argc, char *argv[])
 {
     wchar_t wwww[] = L"abc.,+-123Петр чайка";
@@ -185,6 +187,17 @@ int main(int argc, char *argv[])
     bool ret1, ret2, check = TRUE;
     HWND hwnd = NULL;
 
+    /*
+    INT rv = -1;
+    HANDLE hLCD = CreateFileW(L"\\\\.\\LCD", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
+    BOOL bOn;
+    if ( GetDevicePowerState (hLCD, &bOn) )
+        rv = bOn ? 1 : 0;
+    else
+        wprintf(L"GetDevicePowerState failed: %d\n", GetLastError());
+    CloseHandle(hLCD);
+    wprintf(L"%d\n", rv);
+    return 0;
 
     hwnd = wndChildLastElement(NULL, (const LPWSTR)L"Qt5QWindowIcon", (const LPWSTR)L"MEmu");
     if (hwnd == NULL)
@@ -197,6 +210,41 @@ int main(int argc, char *argv[])
         cout << "hwnd is IsWindow bad" << endl;
         return 0;
     }
+    long cnt = 0;
+    while (check)
+    {
+        MONITORINFO target = {0};
+        target.cbSize = sizeof(MONITORINFO);
+        HMONITOR hmon = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONULL); //MONITOR_DEFAULTTOPRIMARY);
+        //POINT p = { 0, 0 };
+        //HMONITOR hmon = MonitorFromPoint(p, MONITOR_DEFAULTTONULL);
+        if (!hmon)
+        {
+            cout << "hwnd is IsWindow bad" << endl;
+            return 0;
+        }
+        BOOL m1 = FALSE, m2 = FALSE, m3 = FALSE;
+        //m1 = GetDevicePowerState(GetStdHandle(hmon), &m2);
+        //cout << m1 << " - " << m2 << " (1) power (" << ++cnt << ")" << endl;
+        m3 = GetDevicePowerState((HANDLE)hwnd, (BOOL*)&m2);
+        cout << m3 << " - " << m2 << " (2) power (" << cnt << ")" << endl;
+
+        GetMonitorInfo(hmon, &target);
+
+        cout << "bottom of selected monitor in pixels: " << target.rcMonitor.bottom << endl
+             << "Top of the selected monitor" << target.rcMonitor.top << endl
+             << "Right extreme of selected monitor" << target.rcMonitor.right << endl
+             << "Left extreme of selected monitor" << target.rcMonitor.left << endl;
+
+        Sleep(1000);
+    }
+
+
+    return 0;
+    */
+
+
+
     if (argc > 1)
     {
         if (argv[1][0] == '1')
