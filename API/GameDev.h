@@ -83,8 +83,8 @@ BOOL DLL_EXPORT wndSleepScreen(void);
 
 #endif
 /*
-	Last Changed Rev: 64
-	Last Changed Date: 2018-11-05 23:26:24 +0400 (Mon, 05 Nov 2018)
+	Last Changed Rev: 67
+	Last Changed Date: 2018-11-05 23:37:52 +0400 (Mon, 05 Nov 2018)
  */
 
 
