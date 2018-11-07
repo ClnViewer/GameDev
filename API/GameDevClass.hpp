@@ -41,6 +41,7 @@ public:
     bool IsMouseWinHandle();
     bool WakeUpScreen();
     bool SleepScreen();
+    void ScreenSaverOff();
     /* Bitmap */
     bool BmpCapture (POINT *point);
     bool BmpGrayscale (bool isBW);

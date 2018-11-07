@@ -31,6 +31,17 @@
 // #include <iostream>
 // using namespace std;
 
+void DLL_EXPORT wndScreenSaverOff(void)
+{
+    BOOL ret1, ret2;
+
+    if (
+        ((SystemParametersInfo(SPI_GETSCREENSAVERRUNNING, 0, &ret1, 0)) && (ret1)) ||
+        ((SystemParametersInfo(SPI_GETSCREENSAVEACTIVE, 0, &ret2, 0)) && (ret2))
+        )
+        (void) SystemParametersInfo(SPI_SETSCREENSAVEACTIVE, FALSE, NULL, 0);
+}
+
 BOOL DLL_EXPORT wndActivateWindow(HWND hwnd, BOOL isRenew)
 {
     if (hwnd == NULL)
@@ -39,6 +50,8 @@ BOOL DLL_EXPORT wndActivateWindow(HWND hwnd, BOOL isRenew)
     WINDOWPLACEMENT place;
     ZeroMemory(&place, sizeof(place));
     place.length = sizeof(WINDOWPLACEMENT);
+
+    wndScreenSaverOff();
 
     if (!GetWindowPlacement(hwnd, &place))
         return FALSE;

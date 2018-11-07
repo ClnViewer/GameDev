@@ -45,6 +45,7 @@ HWND DLL_EXPORT wndChildTreeElement(HWND, const LPWSTR, const LPWSTR);
 BOOL DLL_EXPORT wndActivateWindow(HWND, BOOL);
 BOOL DLL_EXPORT wndWakeUpScreen(HWND);
 BOOL DLL_EXPORT wndSleepScreen(void);
+void DLL_EXPORT wndScreenSaverOff(void);
 
 /*!
     To C#
@@ -66,6 +67,9 @@ BOOL DLL_EXPORT wndSleepScreen(void);
 
     [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
     public static extern bool wndSleepScreen();
+
+    [DllImport("GameDev.dll", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void wndScreenSaverOff();
 
 */
 

@@ -90,6 +90,10 @@ bool GameDev::SleepScreen()
 {
     return wndSleepScreen();
 }
+void GameDev::ScreenSaverOff()
+{
+    wndScreenSaverOff();
+}
 bool GameDev::BmpGrayscale (bool isBW)
 {
     bool ret;

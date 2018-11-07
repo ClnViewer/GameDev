@@ -65,6 +65,10 @@
 					<Add option="-luser32" />
 					<Add library="user32" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="C:\__Bin\upx.exe -9 bin\Release\GameDev.dll" />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 		</Build>
 		<Unit filename="API/GameDevClass.cpp" />

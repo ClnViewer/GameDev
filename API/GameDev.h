@@ -72,6 +72,7 @@ HWND DLL_EXPORT wndChildTreeElement(HWND, const LPWSTR, const LPWSTR);
 BOOL DLL_EXPORT wndActivateWindow(HWND, BOOL);
 BOOL DLL_EXPORT wndWakeUpScreen(HWND);
 BOOL DLL_EXPORT wndSleepScreen(void);
+void DLL_EXPORT wndScreenSaverOff(void);
 
 
 /* Header from file: version.h */
@@ -83,8 +84,8 @@ BOOL DLL_EXPORT wndSleepScreen(void);
 
 #endif
 /*
-	Last Changed Rev: 67
-	Last Changed Date: 2018-11-05 23:37:52 +0400 (Mon, 05 Nov 2018)
+	Last Changed Rev: 80
+	Last Changed Date: 2018-11-08 01:33:05 +0400 (Thu, 08 Nov 2018)
  */
 
 
