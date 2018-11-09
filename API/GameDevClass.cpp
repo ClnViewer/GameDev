@@ -99,7 +99,7 @@ bool GameDev::BmpFromFile(const LPWSTR fname)
     if (GameDev::hbmp)
         DeleteObject(GameDev::hbmp);
 
-    GameDev::hbmp = hbmpFromFile(fname);
+    GameDev::hbmp = hbmpFromFile(fname, &BmpSize);
     return ((!GameDev::hbmp) ? false : true);
 }
 bool GameDev::BmpFromByte(BYTE *barray)
@@ -107,7 +107,7 @@ bool GameDev::BmpFromByte(BYTE *barray)
     if (GameDev::hbmp)
         DeleteObject(GameDev::hbmp);
 
-    GameDev::hbmp = hbmpFromBuffer(barray);
+    GameDev::hbmp = hbmpFromBuffer(barray, &BmpSize);
     return ((!GameDev::hbmp) ? false : true);
 }
 bool GameDev::BmpGrayscale (bool isBW)

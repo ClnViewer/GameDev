@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
     HBITMAP hbmp = hbmpFromBuffer(buf);
     */
 
-    HBITMAP hbmp = hbmpFromFile((const LPWSTR)L"C:\\__BuildSource\\__TEST__\\__COC__\\GameDevDll\\bin\\Debug\\test-psp-RGB-BTN.bmp");
+    HBITMAP hbmp = hbmpFromFile((const LPWSTR)L"C:\\__BuildSource\\__TEST__\\__COC__\\GameDevDll\\bin\\Debug\\test-psp-RGB-BTN.bmp", NULL);
     if(!hbmp)
     {
         cout << "HBITMAP is null" << endl;

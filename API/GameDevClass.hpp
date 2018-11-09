@@ -35,6 +35,7 @@ private:
     wchar_t codepage[10];
 
 public:
+    POINT BmpSize;
     GameDev(const LPWSTR wclass, const LPWSTR wname, const LPWSTR wmouse);
     ~GameDev();
     bool IsMainWinHandle();

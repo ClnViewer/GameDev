@@ -236,7 +236,7 @@ BOOL DLL_EXPORT hbmpSave(HBITMAP hbmp, const LPWSTR fname)
     return ret;
 }
 
-HBITMAP DLL_EXPORT hbmpFromFile(const LPWSTR fname)
+HBITMAP DLL_EXPORT hbmpFromFile(const LPWSTR fname, POINT *point)
 {
     HANDLE hf = NULL;
     HBITMAP hbmp = NULL;
@@ -260,7 +260,7 @@ HBITMAP DLL_EXPORT hbmpFromFile(const LPWSTR fname)
             LocalFree(bit);
             break;
         }
-        hbmp = hbmpFromBuffer(bit);
+        hbmp = hbmpFromBuffer(bit, point);
         LocalFree(bit);
     }
     while (0);
@@ -270,7 +270,7 @@ HBITMAP DLL_EXPORT hbmpFromFile(const LPWSTR fname)
 
     return hbmp;
 }
-HBITMAP DLL_EXPORT hbmpFromBuffer(BYTE *buf)
+HBITMAP DLL_EXPORT hbmpFromBuffer(BYTE *buf, POINT *point)
 {
     if (!buf)
         return NULL;
@@ -281,6 +281,12 @@ HBITMAP DLL_EXPORT hbmpFromBuffer(BYTE *buf)
     BITMAPINFO       *bi   = (BITMAPINFO*)&buf[sizeof(BITMAPFILEHEADER)];
     BITMAPINFOHEADER *bih  = (BITMAPINFOHEADER*)&bi->bmiHeader;
     unsigned char    *bit  = &buf[bfh->bfOffBits];
+
+    if (point)
+    {
+        point->x = bih->biWidth;
+        point->y = bih->biHeight;
+    }
 
 #   if defined(__HBMP_DEBUG)
     printf("\nbfOffBits=%ld = [(-1)%X (0)%X (+1)%X]\n", bfh->bfOffBits, buf[bfh->bfOffBits - 1], buf[bfh->bfOffBits], buf[bfh->bfOffBits + 1]);
