@@ -43,6 +43,8 @@ public:
     bool SleepScreen();
     void ScreenSaverOff();
     /* Bitmap */
+    bool BmpFromFile(const LPWSTR fname);
+    bool BmpFromByte(BYTE *barray);
     bool BmpCapture (POINT *point);
     bool BmpGrayscale (bool isBW);
     bool BmpEquals (struct dataComparable *data);

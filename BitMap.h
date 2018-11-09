@@ -56,6 +56,8 @@ double  DLL_EXPORT   bmpComparable(struct dataComparable*);
 void    DLL_EXPORT   bmpGrayscale(BOOL, BYTE*, BYTE*, int, int, int);
 
 /*! Bitmap HBITMAP data */
+HBITMAP DLL_EXPORT   hbmpFromBuffer(BYTE*);
+HBITMAP DLL_EXPORT   hbmpFromFile(const LPWSTR);
 HBITMAP DLL_EXPORT   hbmpGetWindow(const LPWSTR, const LPWSTR, BOOL, POINT*, HWND*);
 HBITMAP DLL_EXPORT   hbmpCaptureWindow(HWND, POINT*);
 BOOL    DLL_EXPORT   hbmpGrayscale(HBITMAP, BOOL);

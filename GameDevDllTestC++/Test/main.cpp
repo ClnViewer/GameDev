@@ -179,256 +179,40 @@ typedef BOOL (*pGetDevicePowerState)(HANDLE, BOOL*);
 
 int main(int argc, char *argv[])
 {
-    wchar_t wwww[] = L"abc.,+-123Петр чайка";
-    wchar_t www[] = L"18 is not 22 or yes!";
-    wchar_t ww[] = L"ух 1234567890 летять утки, и 22 гуся (!\"№;%:?*()_+=-)";
-    wchar_t w[] = L"ух 1234567890 летять утки, и 22 гуся. шли-бы они лесом! :)";
-
-    bool ret1, ret2, check = TRUE;
-    HWND hwnd = NULL;
+    (void) argc;
+    (void) argv;
 
     /*
-    INT rv = -1;
-    HANDLE hLCD = CreateFileW(L"\\\\.\\LCD", GENERIC_READ, 0, 0, OPEN_EXISTING, 0, 0);
-    BOOL bOn;
-    if ( GetDevicePowerState (hLCD, &bOn) )
-        rv = bOn ? 1 : 0;
-    else
-        wprintf(L"GetDevicePowerState failed: %d\n", GetLastError());
-    CloseHandle(hLCD);
-    wprintf(L"%d\n", rv);
-    return 0;
+    unsigned char buf[1024 * 75] = {0};
 
-    hwnd = wndChildLastElement(NULL, (const LPWSTR)L"Qt5QWindowIcon", (const LPWSTR)L"MEmu");
-    if (hwnd == NULL)
+    FILE *f = fopen( "C:\\__BuildSource\\__TEST__\\__COC__\\GameDevDll\\bin\\Debug\\test-psp-RGB-BTN.bmp", "rb" );
+    if(!f)
     {
-        cout << "hwnd is NULL" << endl;
-        return 0;
-    }
-    if (!IsWindow(hwnd))
-    {
-        cout << "hwnd is IsWindow bad" << endl;
-        return 0;
-    }
-    long cnt = 0;
-    while (check)
-    {
-        MONITORINFO target = {0};
-        target.cbSize = sizeof(MONITORINFO);
-        HMONITOR hmon = MonitorFromWindow(hwnd, MONITOR_DEFAULTTONULL); //MONITOR_DEFAULTTOPRIMARY);
-        //POINT p = { 0, 0 };
-        //HMONITOR hmon = MonitorFromPoint(p, MONITOR_DEFAULTTONULL);
-        if (!hmon)
-        {
-            cout << "hwnd is IsWindow bad" << endl;
-            return 0;
-        }
-        BOOL m1 = FALSE, m2 = FALSE, m3 = FALSE;
-        //m1 = GetDevicePowerState(GetStdHandle(hmon), &m2);
-        //cout << m1 << " - " << m2 << " (1) power (" << ++cnt << ")" << endl;
-        m3 = GetDevicePowerState((HANDLE)hwnd, (BOOL*)&m2);
-        cout << m3 << " - " << m2 << " (2) power (" << cnt << ")" << endl;
-
-        GetMonitorInfo(hmon, &target);
-
-        cout << "bottom of selected monitor in pixels: " << target.rcMonitor.bottom << endl
-             << "Top of the selected monitor" << target.rcMonitor.top << endl
-             << "Right extreme of selected monitor" << target.rcMonitor.right << endl
-             << "Left extreme of selected monitor" << target.rcMonitor.left << endl;
-
-        Sleep(1000);
+        cout << "FILE is null" << endl;
+        return 1;
     }
 
+    fread((void*)buf, 1, sizeof(buf), f);
+    fclose(f);
 
-    return 0;
+    HBITMAP hbmp = hbmpFromBuffer(buf);
     */
 
-
-
-    if (argc > 1)
+    HBITMAP hbmp = hbmpFromFile((const LPWSTR)L"C:\\__BuildSource\\__TEST__\\__COC__\\GameDevDll\\bin\\Debug\\test-psp-RGB-BTN.bmp");
+    if(!hbmp)
     {
-        if (argv[1][0] == '1')
-        {
-            cout << "Send window WM_PAINT" << endl;
-            PostMessage(hwnd, WM_PAINT, 0, 0);
-        }
-        else if (argv[1][0] == '2')
-        {
-            cout << "Redraw window" << endl;
-            RedrawWindow(hwnd,NULL,0,0);
-        }
-        else if (argv[1][0] == '3')
-        {
-            cout << "Update window" << endl;
-            UpdateWindow(hwnd);
-        }
-    }
-    else
-    {
-        cout << "Enter: " << argv[0] << " [1 | 2 | 3]" << endl;
+        cout << "HBITMAP is null" << endl;
+        return 1;
     }
 
-    //
+    OpenClipboard(NULL);
+    EmptyClipboard();
+    SetClipboardData(CF_BITMAP, hbmp);
+    CloseClipboard();
 
-    return 0;
+    hbmpSave(hbmp, (const LPWSTR)L"save-test.bmp");
 
-    hwnd = GetDesktopWindow();
-    if (hwnd == NULL)
-    {
-        cout << "hwnd is NULL" << endl;
-        return 0;
-    }
-
-    //Sleep(2000);
-    //SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_SCREENSAVE, (LPARAM)0);
-    //Sleep(5000);
-    cout << "SC_MONITORPOWER 2" << endl;
-    SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, MAKELPARAM(2,0));
-    Sleep(5000);
-    POINT p = { 100, 500 };
-    mouseMoveAW(hwnd, &p);
-    //SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM) 1);
-    //Sleep(5000);
-    /*
-    cout << "SC_MONITORPOWER -1" << endl;
-    SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, MAKELPARAM(-1,0));
-    Sleep(5000);
-    cout << "SC_MONITORPOWER 1" << endl;
-    SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, MAKELPARAM(1,0));
-    */
-    return 0;
-
-    while (check)
-    {
-        if (!SystemParametersInfo(SPI_GETSCREENSAVERRUNNING, 0, &ret1, 0))
-        {
-            cout << "SystemParametersInfo error" << endl;
-            return 0;
-        }
-        if (!SystemParametersInfo(SPI_GETSCREENSAVEACTIVE, 0, &ret2, 0))
-        {
-            cout << "SystemParametersInfo error" << endl;
-            return 0;
-        }
-        if ((ret1) || (ret2))
-        {
-            check = FALSE;
-            cout << "ScreenSaver ON" << endl;
-        }
-        else
-            cout << "ScreenSaver OFF" << endl;
-
-        Sleep(1000);
-    }
-
-    SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM)-1);
-    //Sleep(1000);
-    //SendMessage(HWND_BROADCAST, WM_SYSCOMMAND, SC_MONITORPOWER, (LPARAM)1);
-    return 0;
-
-    //if (!(hwnd = testCaptureWindow())) return 127;
-    if (!(hwnd = testMouseToWindow()))
-        return 126;
-    //if (!(hwnd = testKeyToWindow(w))) return 125;
-
-
-    /*
-        GameDev *gmdev = new GameDev((const LPWSTR)L"Notepad2", (const LPWSTR)L"Untiled - Notepad2");
-        ret = gmdev->IsHandle();
-        cout << "IsHandle return: " << ret << endl;
-        ret = gmdev->BmpCapture(nullptr);
-        cout << "Capture return: " << ret << endl;
-        ret = gmdev->BmpSave((const LPWSTR)L"Cap-Notepad2.bmp");
-        cout << "Save return: " << ret << endl;
-
-        delete  gmdev;
-    */
-
-    /*
-    WINDOWPLACEMENT place;
-    ZeroMemory(&place, sizeof(place));
-    place.length = sizeof(WINDOWPLACEMENT);
-    GetWindowPlacement(hwnd, &place);
-    printf("showCmd: %d\n", place.showCmd);
-
-    if ((place.showCmd == SW_MINIMIZE) || (place.showCmd == SW_OTHERZOOM))
-    {
-        PostMessage(hwnd, WM_SYSCOMMAND, (WPARAM)SC_RESTORE, (LPARAM)0);
-        printf("SW_MINIMIZE\n");
-    }
-    */
-    //printf("wndActivateWindow: %d\n", wndActivateWindow(hwnd));
-
-    /*
-    hwnd = wndChildLastElement(NULL, (const LPWSTR)L"Qt5QWindowIcon", (const LPWSTR)L"MEmu");
-    if (hwnd == NULL)
-    {
-        cout << "hwnd is NULL" << endl;
-        return 0;
-    }
-    if (!IsWindow(hwnd))
-    {
-        cout << "hwnd is IsWindow bad" << endl;
-        return 0;
-    }
-    HWND twnd = tezt(hwnd, (const LPWSTR)L"Qt5QWindowIcon", (const LPWSTR)L"RenderWindowWindow");
-    if (twnd == NULL)
-    {
-        cout << "twnd is NULL" << endl;
-        return 0;
-    }
-    */
-
-    /*
-    "MainWindowWindow"
-      "CenterWidgetWindow"
-        "RenderWindowWindow", Qt5QWindowIcon
-
-
-    HWND mwnd = NULL, cwnd = NULL, rwnd = NULL;
-    if ((hwnd = FindWindowExW(NULL, hwnd, L"Qt5QWindowIcon", L"MEmu")) != NULL)
-    {
-        printf("hwnd WINDOW FOUND\n");
-        if ((mwnd = FindWindowExW(hwnd, mwnd, L"Qt5QWindowIcon", L"MainWindowWindow")) != NULL)
-        {
-            printf("mwnd WINDOW FOUND\n");
-            if ((cwnd = FindWindowExW(mwnd, cwnd, L"Qt5QWindowIcon", L"CenterWidgetWindow")) != NULL)
-            {
-                printf("cwnd WINDOW FOUND\n");
-                if ((rwnd = FindWindowExW(cwnd, rwnd, L"Qt5QWindowIcon", L"RenderWindowWindow")) != NULL)
-                {
-                    printf("rwnd WINDOW FOUND\n");
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
-    }
-    */
-
-    return 0;
-
-    Sleep(7000);
-
-    HWND mwnd = (HWND)0x00010304;
-    char rBuff[64] = {0};
-    sprintf(rBuff, "%p", mwnd);
-    cout << "WinID 0 [" << rBuff << "]"  << endl;
-
-    PostMessage(mwnd, WM_SETFOCUS, 0x0, 0x0);
-    //Sleep(50);
-    PostMessage(mwnd, WM_MOUSEMOVE, 0x0, MAKELPARAM(10,300));
-    PostMessage(mwnd, WM_MOUSEMOVE, 0x0, MAKELPARAM(10,300));
-    //Sleep(10);
-    //PostMessage(mwnd, WM_MOUSEACTIVATE, (WPARAM)(HWND)0x000102C0, MAKELPARAM(1,WM_LBUTTONDOWN));
-    //Sleep(10);
-    PostMessage(mwnd, WM_LBUTTONDOWN, 0x00000001, MAKELPARAM(10,300));
-    //Sleep(20);
-    PostMessage(mwnd, WM_LBUTTONUP, 0x00000000, MAKELPARAM(10,300));
-    PostMessage(mwnd, WM_KILLFOCUS, 0x0, 0x0);
-    printf("SendMessage click!\n");
+    DeleteObject(hbmp);
 
     return 0;
 }

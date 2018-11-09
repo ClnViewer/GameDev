@@ -94,6 +94,22 @@ void GameDev::ScreenSaverOff()
 {
     wndScreenSaverOff();
 }
+bool GameDev::BmpFromFile(const LPWSTR fname)
+{
+    if (GameDev::hbmp)
+        DeleteObject(GameDev::hbmp);
+
+    GameDev::hbmp = hbmpFromFile(fname);
+    return ((!GameDev::hbmp) ? false : true);
+}
+bool GameDev::BmpFromByte(BYTE *barray)
+{
+    if (GameDev::hbmp)
+        DeleteObject(GameDev::hbmp);
+
+    GameDev::hbmp = hbmpFromBuffer(barray);
+    return ((!GameDev::hbmp) ? false : true);
+}
 bool GameDev::BmpGrayscale (bool isBW)
 {
     bool ret;

@@ -28,8 +28,8 @@
 #include "Wnd.h"
 
 /* Debug output Only */
-//#include <stdio.h>
-//#include <string.h>
+#include <stdio.h>
+#include <string.h>
 
 HBITMAP DLL_EXPORT hbmpCaptureWindow(HWND hwnd, POINT *p)
 {
@@ -125,7 +125,7 @@ BOOL DLL_EXPORT hbmpGrayscale(HBITMAP hbmp, BOOL isbw)
         if (!GetDIBits(hdcc, hbmp, 0, bm.bmHeight, bmppix, &bmpi, DIB_RGB_COLORS))
             break;
 
-#       pragma omp parallel for schedule(dynamic)
+        #       pragma omp parallel for schedule(dynamic)
         for(int y = 0; y < bm.bmHeight; y++)
         {
             for(int x = 0; x < st; x++)
@@ -182,18 +182,21 @@ BOOL DLL_EXPORT hbmpSave(HBITMAP hbmp, const LPWSTR fname)
     bmpi.bmiHeader.biBitCount = 24;
     bmpi.bmiHeader.biCompression = BI_RGB;
 
+    UINT bmsize;
     int bmppad = ((bm.bmWidth * 3) % 4);
     if (bmppad != 0)
         bmppad = 4 - bmppad;
 
+    bmsize = (UINT)((bm.bmWidth * 3 + bmppad) * bm.bmHeight);
+
     bmph.bfOffBits = (DWORD)sizeof(BITMAPFILEHEADER) + (DWORD)sizeof(BITMAPINFOHEADER);
     bmph.bfSize = (DWORD)(
-                      ((bm.bmWidth * 3 + bmppad) * bm.bmHeight)
+                      bmsize
                       + sizeof(BITMAPFILEHEADER)
                       + sizeof(BITMAPINFOHEADER)
                   );
     bmph.bfType = 0x4D42;
-    bmppix = new BYTE[(bm.bmWidth * 3 + bmppad) * bm.bmHeight];
+    bmppix = new BYTE[bmsize];
 
     do
     {
@@ -233,6 +236,82 @@ BOOL DLL_EXPORT hbmpSave(HBITMAP hbmp, const LPWSTR fname)
     return ret;
 }
 
+HBITMAP DLL_EXPORT hbmpFromFile(const LPWSTR fname)
+{
+    HANDLE hf = NULL;
+    HBITMAP hbmp = NULL;
+
+    do
+    {
+        BYTE *bit;
+        DWORD sz, rsz;
+
+        if (!(hf = CreateFileW(fname, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL)))
+            break;
+
+        if ((sz = GetFileSize(hf, NULL)) == INVALID_FILE_SIZE)
+            break;
+
+        if ((bit = (BYTE*)LocalAlloc(LMEM_FIXED, (sz * sizeof(BYTE)))) == NULL)
+            break;
+
+        if ((!ReadFile(hf, bit, sz, &rsz, NULL)) || (sz != rsz))
+        {
+            LocalFree(bit);
+            break;
+        }
+        hbmp = hbmpFromBuffer(bit);
+        LocalFree(bit);
+    }
+    while (0);
+
+    if (hf)
+        CloseHandle(hf);
+
+    return hbmp;
+}
+HBITMAP DLL_EXPORT hbmpFromBuffer(BYTE *buf)
+{
+    if (!buf)
+        return NULL;
+
+    HDC               hdc  = NULL;
+    HBITMAP           hbmp = NULL;
+    BITMAPFILEHEADER *bfh  = (BITMAPFILEHEADER*)&buf[0];
+    BITMAPINFO       *bi   = (BITMAPINFO*)&buf[sizeof(BITMAPFILEHEADER)];
+    BITMAPINFOHEADER *bih  = (BITMAPINFOHEADER*)&bi->bmiHeader;
+    unsigned char    *bit  = &buf[bfh->bfOffBits];
+
+#   if defined(__HBMP_DEBUG)
+    printf("\nbfOffBits=%ld = [(-1)%X (0)%X (+1)%X]\n", bfh->bfOffBits, buf[bfh->bfOffBits - 1], buf[bfh->bfOffBits], buf[bfh->bfOffBits + 1]);
+    printf("biWidth=%ld, biHeight=%ld\n", bih->biWidth, bih->biHeight);
+    printf("biCompression=%ld/%d, biBitCount=%d\n", bih->biCompression, BI_RGB, bih->biBitCount);
+    printf("biSize=%ld, biSizeImage=%ld\n", bih->biSize, bih->biSizeImage);
+    printf("biPlanes=%d\n", bih->biPlanes);
+#   endif
+
+    do
+    {
+        if (!(hdc = CreateCompatibleDC(NULL)))
+            break;
+
+        hbmp = CreateDIBitmap(
+                   hdc,
+                   bih,
+                   CBM_INIT,
+                   (void*)bit,
+                   bi,
+                   DIB_RGB_COLORS
+               );
+    }
+    while (0);
+
+    if (hdc)
+        DeleteDC(hdc);
+
+    return hbmp;
+}
+
 HBITMAP DLL_EXPORT hbmpGetWindow(const LPWSTR wclass, const LPWSTR wname, BOOL isbw, POINT *p, HWND *hwnd)
 {
     HBITMAP hbmp = NULL;
@@ -262,5 +341,5 @@ HBITMAP DLL_EXPORT hbmpGetWindow(const LPWSTR wclass, const LPWSTR wname, BOOL i
 void DLL_EXPORT hbmpFree(HBITMAP hbmp)
 {
     if (hbmp != NULL)
-	DeleteObject(hbmp);
+        DeleteObject(hbmp);
 }

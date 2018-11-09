@@ -40,6 +40,8 @@ extern "C"
 /* Header from file: BitMap.h */
 double  DLL_EXPORT   bmpComparable(struct dataComparable*);
 void    DLL_EXPORT   bmpGrayscale(BOOL, BYTE*, BYTE*, int, int, int);
+HBITMAP DLL_EXPORT   hbmpFromBuffer(BYTE*);
+HBITMAP DLL_EXPORT   hbmpFromFile(const LPWSTR);
 HBITMAP DLL_EXPORT   hbmpGetWindow(const LPWSTR, const LPWSTR, BOOL, POINT*, HWND*);
 HBITMAP DLL_EXPORT   hbmpCaptureWindow(HWND, POINT*);
 BOOL    DLL_EXPORT   hbmpGrayscale(HBITMAP, BOOL);
@@ -84,8 +86,8 @@ void DLL_EXPORT wndScreenSaverOff(void);
 
 #endif
 /*
-	Last Changed Rev: 80
-	Last Changed Date: 2018-11-08 01:33:05 +0400 (Thu, 08 Nov 2018)
+	Last Changed Rev: 81
+	Last Changed Date: 2018-11-09 08:14:54 +0400 (Fri, 09 Nov 2018)
  */
 
 
