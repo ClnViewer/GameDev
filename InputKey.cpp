@@ -226,7 +226,7 @@ static void __sendChar(HWND hwnd, kbLang *lng, wchar_t w, UINT pos, int s)
             #           pragma omp parallel for schedule(static) shared(isFound)
             for (unsigned i = 0; i < lng->layoutSize; i++)
             {
-                if(isFound)
+                if (isFound)
                     continue;
                 if (lng->layoutArray[i].w == w)
                 {

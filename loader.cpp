@@ -35,7 +35,10 @@ const char * DLL_EXPORT DllVersion(void)
     return (const char*)VERSION;
 }
 
-extern "C" DLL_EXPORT BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
+#ifdef __cplusplus
+extern "C"
+#endif
+DLL_EXPORT BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
     (void) hinstDLL;
     (void) lpvReserved;
