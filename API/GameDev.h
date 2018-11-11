@@ -50,7 +50,7 @@ void    DLL_EXPORT   hbmpFree(HBITMAP);
 
 
 /* Header from file: InputKey.h */
-struct kbdLang * DLL_EXPORT keyLangList(void);
+struct kbdLang * DLL_EXPORT keyLangList(int*);
 BOOL DLL_EXPORT keySetText(HWND, const LPWSTR, LPWSTR);
 void DLL_EXPORT keySendText(HWND, const LPWSTR, LPWSTR, size_t);
 void DLL_EXPORT keySendTextElement(HWND, const LPWSTR, LPWSTR, size_t, const LPWSTR, const LPWSTR, int);
@@ -86,8 +86,8 @@ void DLL_EXPORT wndScreenSaverOff(void);
 
 #endif
 /*
-	Last Changed Rev: 100
-	Last Changed Date: 2018-11-11 05:10:12 +0400 (Sun, 11 Nov 2018)
+	Last Changed Rev: 103
+	Last Changed Date: 2018-11-11 14:03:51 +0400 (Sun, 11 Nov 2018)
  */
 
 

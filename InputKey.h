@@ -39,7 +39,7 @@ struct kbdLang
     LPWSTR name;
 };
 
-struct kbdLang * DLL_EXPORT keyLangList(void);
+struct kbdLang * DLL_EXPORT keyLangList(int*);
 BOOL DLL_EXPORT keySetText(HWND, const LPWSTR, LPWSTR);
 void DLL_EXPORT keySendText(HWND, const LPWSTR, LPWSTR, size_t);
 void DLL_EXPORT keySendTextElement(HWND, const LPWSTR, LPWSTR, size_t, const LPWSTR, const LPWSTR, int);

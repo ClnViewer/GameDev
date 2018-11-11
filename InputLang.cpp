@@ -32,7 +32,11 @@ static struct kbdLang __kbdLang[] = {
     { .key = NULL, .name = NULL }
 };
 
-struct kbdLang * DLL_EXPORT keyLangList(void)
+struct kbdLang * DLL_EXPORT keyLangList(int *idx)
 {
+    if (idx)
+    {
+        *idx = __NELE(__kbdLang);
+    }
     return __kbdLang;
 }
