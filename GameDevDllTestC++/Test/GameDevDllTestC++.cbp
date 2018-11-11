@@ -49,7 +49,9 @@
 					<Add option="-luser32" />
 					<Add option="-lgdi32" />
 					<Add option="-lgomp" />
-					<Add library="C:/__BuildSource/__TEST__/__COC__/GameDevDll/bin/Release/libGameDev.a" />
+					<Add option="-LC:\__BuildSource\__SVN__\CoCAnnouncer\GameDevDll\bin\Release" />
+					<Add option="-Wl,-rpath=C:\__BuildSource\__SVN__\CoCAnnouncer\GameDevDll\bin\Release" />
+					<Add library="GameDev" />
 				</Linker>
 			</Target>
 		</Build>
