@@ -71,7 +71,7 @@
 					<Add after="C:\__Bin\upx.exe -9 bin\Release\GameDev.dll" />
 					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Debug\GameDev.dll" />
 					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Release\GameDev.dll" />
-					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Dotfuscator\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Publish\GameDev.dll" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
