@@ -125,7 +125,7 @@ BOOL DLL_EXPORT hbmpGrayscale(HBITMAP hbmp, BOOL isbw)
         if (!GetDIBits(hdcc, hbmp, 0, bm.bmHeight, bmppix, &bmpi, DIB_RGB_COLORS))
             break;
 
-        #       pragma omp parallel for schedule(dynamic)
+#       pragma omp parallel for schedule(dynamic)
         for(int y = 0; y < bm.bmHeight; y++)
         {
             for(int x = 0; x < st; x++)

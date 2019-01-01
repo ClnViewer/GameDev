@@ -41,6 +41,7 @@
 				</Linker>
 				<ExtraCommands>
 					<Add after="cmd.exe /C copy bin\Debug\GameDev.dll ..\GUI\bin\Debug\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Debug\GameDev.dll ..\GameDataDll\bin\Debug\GameDev.dll" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -76,6 +77,7 @@
 					<Add after="C:\__Bin\upx.exe -9 bin\Release\GameDev.dll" />
 					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Release\GameDev.dll" />
 					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Publish\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GameDataDll\bin\Release\GameDev.dll" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
