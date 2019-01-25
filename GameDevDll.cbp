@@ -40,7 +40,11 @@
 					<Add option="-Wl,-rpath=./" />
 				</Linker>
 				<ExtraCommands>
+					<Add before="cmd.exe /C del bin\Debug\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GUI\bin\Debug\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GameDataDll\bin\Debug\GameDev.dll" />
 					<Add after="cmd.exe /C copy bin\Debug\GameDev.dll ..\GUI\bin\Debug\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Debug\GameDev.dll ..\GameDataDll\bin\Debug\GameDev.dll" />
 					<Add after="cmd.exe /C copy bin\Debug\GameDev.dll ..\GameDataDll\bin\Debug\GameDev.dll" />
 					<Mode after="always" />
 				</ExtraCommands>
@@ -74,6 +78,10 @@
 					<Add option="-Wl,-rpath=./" />
 				</Linker>
 				<ExtraCommands>
+					<Add before="cmd.exe /C del bin\Release\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GUI\bin\Release\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GUI\bin\Publish\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GameDataDll\bin\Release\GameDev.dll" />
 					<Add after="C:\__Bin\upx.exe -9 bin\Release\GameDev.dll" />
 					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Release\GameDev.dll" />
 					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Publish\GameDev.dll" />
