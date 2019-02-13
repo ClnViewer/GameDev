@@ -33,7 +33,7 @@ extern "C"
 {
 #endif
 
-#define __MOUSE_CORD(A,B) (int)(A + ((B / (rand() % 10 + 1)) / 2))
+#define __MOUSE_CORD(A,B) static_cast<int> (A + ((B / (rand() % 10 + 1)) / 2))
 
 typedef enum
 {

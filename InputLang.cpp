@@ -27,7 +27,7 @@
 #include "InputKey.h"
 
 static struct kbdLang __kbdLang[] = {
-#    define __LNG_ID(A,B) { .key = (LPWSTR)L##A, .name = (LPWSTR)L##B },
+#    define __LNG_ID(A,B) { .key = const_cast<LPWSTR>(L##A), .name = const_cast<LPWSTR>(L##B) },
 #    include "InputLangID.h"
     { .key = NULL, .name = NULL }
 };

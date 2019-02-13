@@ -58,7 +58,7 @@ BOOL DLL_EXPORT wndActivateWindow(HWND hwnd, BOOL isRenew)
 
     if ((isRenew) || (place.showCmd == SW_MINIMIZE) || (place.showCmd == SW_OTHERZOOM))
     {
-        PostMessage(hwnd, WM_SYSCOMMAND, (WPARAM)SC_RESTORE, (LPARAM)0);
+        PostMessage(hwnd, WM_SYSCOMMAND, (WPARAM)SC_RESTORE, static_cast<LPARAM> (0));
         Sleep(15);
     }
     return RedrawWindow(hwnd, NULL, 0, 0U);

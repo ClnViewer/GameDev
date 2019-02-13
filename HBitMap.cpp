@@ -187,10 +187,10 @@ BOOL DLL_EXPORT hbmpSave(HBITMAP hbmp, const LPWSTR fname)
     if (bmppad != 0)
         bmppad = 4 - bmppad;
 
-    bmsize = (UINT)((bm.bmWidth * 3 + bmppad) * bm.bmHeight);
+    bmsize = static_cast<UINT>((bm.bmWidth * 3 + bmppad) * bm.bmHeight);
 
-    bmph.bfOffBits = (DWORD)sizeof(BITMAPFILEHEADER) + (DWORD)sizeof(BITMAPINFOHEADER);
-    bmph.bfSize = (DWORD)(
+    bmph.bfOffBits = static_cast<DWORD>(sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER));
+    bmph.bfSize = static_cast<DWORD>(
                       bmsize
                       + sizeof(BITMAPFILEHEADER)
                       + sizeof(BITMAPINFOHEADER)
@@ -220,9 +220,9 @@ BOOL DLL_EXPORT hbmpSave(HBITMAP hbmp, const LPWSTR fname)
             break;
 
         DWORD sz = 0;
-        WriteFile(fout, (LPSTR)&bmph, sizeof(BITMAPFILEHEADER), &sz, NULL);
-        WriteFile(fout, (LPSTR)&bmpi.bmiHeader, sizeof(BITMAPINFOHEADER), &sz, NULL);
-        WriteFile(fout, (LPSTR)bmppix, (bm.bmWidth * 3 + bmppad) * bm.bmHeight, &sz, NULL);
+        WriteFile(fout, static_cast<void*>(&bmph), sizeof(BITMAPFILEHEADER), &sz, NULL);
+        WriteFile(fout, static_cast<void*>(&bmpi.bmiHeader), sizeof(BITMAPINFOHEADER), &sz, NULL);
+        WriteFile(fout, static_cast<void*>(bmppix), (bm.bmWidth * 3 + bmppad) * bm.bmHeight, &sz, NULL);
         CloseHandle(fout);
         ret = TRUE;
     }
@@ -252,7 +252,7 @@ HBITMAP DLL_EXPORT hbmpFromFile(const LPWSTR fname, POINT *point)
         if ((sz = GetFileSize(hf, NULL)) == INVALID_FILE_SIZE)
             break;
 
-        if ((bit = (BYTE*)LocalAlloc(LMEM_FIXED, (sz * sizeof(BYTE)))) == NULL)
+        if ((bit = static_cast<PBYTE>(LocalAlloc(LMEM_FIXED, (sz * sizeof(BYTE))))) == NULL)
             break;
 
         if ((!ReadFile(hf, bit, sz, &rsz, NULL)) || (sz != rsz))
@@ -277,9 +277,9 @@ HBITMAP DLL_EXPORT hbmpFromBuffer(BYTE *buf, POINT *point)
 
     HDC               hdc  = NULL;
     HBITMAP           hbmp = NULL;
-    BITMAPFILEHEADER *bfh  = (BITMAPFILEHEADER*)&buf[0];
-    BITMAPINFO       *bi   = (BITMAPINFO*)&buf[sizeof(BITMAPFILEHEADER)];
-    BITMAPINFOHEADER *bih  = (BITMAPINFOHEADER*)&bi->bmiHeader;
+    BITMAPFILEHEADER *bfh  = reinterpret_cast<BITMAPFILEHEADER*>(&buf[0]);
+    BITMAPINFO       *bi   = reinterpret_cast<BITMAPINFO*>(&buf[sizeof(BITMAPFILEHEADER)]);
+    BITMAPINFOHEADER *bih  = reinterpret_cast<BITMAPINFOHEADER*>(&bi->bmiHeader);
     unsigned char    *bit  = &buf[bfh->bfOffBits];
 
     if (point)
@@ -305,7 +305,7 @@ HBITMAP DLL_EXPORT hbmpFromBuffer(BYTE *buf, POINT *point)
                    hdc,
                    bih,
                    CBM_INIT,
-                   (void*)bit,
+                   static_cast<void*> (bit),
                    bi,
                    DIB_RGB_COLORS
                );

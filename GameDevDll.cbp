@@ -26,6 +26,7 @@
 					<Add option="-m32" />
 					<Add option="-g" />
 					<Add option="-fopenmp" />
+					<Add option="-Wold-style-cast" />
 					<Add option="-DBUILD_DLL" />
 					<Add option="-D__InputKB_00010419" />
 				</Compiler>
@@ -63,6 +64,7 @@
 					<Add option="-std=c++17" />
 					<Add option="-m32" />
 					<Add option="-fopenmp" />
+					<Add option="-Wold-style-cast" />
 					<Add option="-DBUILD_DLL" />
 					<Add option="-D__InputKB_00010419" />
 				</Compiler>

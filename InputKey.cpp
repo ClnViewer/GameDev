@@ -66,25 +66,25 @@ static kbLayout kbLayoutBack = { .w = 0x0, .key = VK_BACK, .scan = DIK_BACK, .sh
 static kbLayout kbLayout_Empty[] =  { { .w = 0x0, .key = 0x0, .scan = 0x0, .shift = 0x0, .numl = 0x0 } };
 static kbLayout kbLayout_RU_00000419[] =
 {
-#define __KB_LAYOT(A,B,C,D,E) { .w = (wchar_t)(A), .key = B, .scan = C, .shift = D, .numl = E },
+#define __KB_LAYOT(A,B,C,D,E) { .w = static_cast<wchar_t>(A), .key = B, .scan = C, .shift = D, .numl = E },
 #include "InputKB_00000419.h"
 };
 static kbLayout kbLayout_RU_00010419[] =
 {
-#define __KB_LAYOT(A,B,C,D,E) { .w = (wchar_t)(A), .key = B, .scan = C, .shift = D, .numl = E },
+#define __KB_LAYOT(A,B,C,D,E) { .w = static_cast<wchar_t>(A), .key = B, .scan = C, .shift = D, .numl = E },
 #include "InputKB_00010419.h"
 };
 
 static void __sleep(size_t seed)
 {
     Sleep(
-        (DWORD)((rand() % (seed * 75) + 1) + 200)
+        static_cast<DWORD> ((rand() % (seed * 75) + 1) + 200)
     );
 }
 
 static size_t __randomTextBack(size_t seed)
 {
-    return (size_t)(rand() % seed + 1);
+    return static_cast<size_t> (rand() % seed + 1);
 }
 
 static void __keyNumlock(HWND hwnd, dataLparam *dl)
@@ -95,7 +95,7 @@ static void __keyNumlock(HWND hwnd, dataLparam *dl)
     dl->data.nExtended = 1;
 
     PostMessageW(hwnd, WM_KEYDOWN,
-                 reinterpret_cast<WPARAM>((UINT)kbLayoutNuml.key),
+                 reinterpret_cast<WPARAM>(static_cast<UINT> (kbLayoutNuml.key)),
                  reinterpret_cast<LPARAM>(dl->lparam)
                 );
 
@@ -103,7 +103,7 @@ static void __keyNumlock(HWND hwnd, dataLparam *dl)
     dl->data.nPrev = dl->data.nTrans = 1;
 
     PostMessageW(hwnd, WM_KEYUP,
-                 reinterpret_cast<WPARAM>((UINT)kbLayoutNuml.key),
+                 reinterpret_cast<WPARAM>(static_cast<UINT> (kbLayoutNuml.key)),
                  reinterpret_cast<LPARAM>(dl->lparam)
                 );
 
@@ -165,17 +165,17 @@ static void __sendKey(HWND hwnd, kbLayout *kbl, int s)
     dl.data.nScanCode = kbl->scan;
     dl.data.nRepeatCount = 1;
     PostMessageW(hwnd, WM_KEYDOWN,
-                 reinterpret_cast<WPARAM>((UINT)kbl->key),
+                 reinterpret_cast<WPARAM>(static_cast<UINT> (kbl->key)),
                  reinterpret_cast<LPARAM>(dl.lparam)
                 );
 
     dl.data.nRepeatCount = 0;
     dl.data.nPrev = dl.data.nTrans = 1;
 
-    Sleep((DWORD)(rand() % 100 + 1));
+    Sleep(static_cast<DWORD> (rand() % 100 + 1));
 
     PostMessageW(hwnd, WM_KEYUP,
-                 reinterpret_cast<WPARAM>((UINT)kbl->key),
+                 reinterpret_cast<WPARAM>(static_cast<UINT> (kbl->key)),
                  reinterpret_cast<LPARAM>(dl.lparam)
                 );
 
@@ -207,7 +207,7 @@ static void __sendChar(HWND hwnd, kbLang *lng, wchar_t w, UINT pos, int s)
                 LPWSTR wo;
                 wchar_t wc[] = { w, L'\0' };
 
-                wo = CharLowerW((LPWSTR)wc);
+                wo = CharLowerW(const_cast<LPWSTR> (wc));
                 if (wo == NULL)
                     break;
 
@@ -304,7 +304,7 @@ static void __changeLanguage(HWND hwnd, const LPWSTR codepg, kbLang *lng)
         return;
 
     //PostMessage(hwnd, 0x0050, 2, 0);
-    PostMessage(hwnd, WM_INPUTLANGCHANGEREQUEST, 0U, (LPARAM)hkl);
+    PostMessage(hwnd, WM_INPUTLANGCHANGEREQUEST, 0U, reinterpret_cast<LPARAM> (hkl));
     //PostMessage(hwnd, WM_INPUTLANGCHANGE, 0U, reinterpret_cast<LPARAM>(hkl));
 }
 
@@ -329,7 +329,7 @@ void DLL_EXPORT keySendText(HWND hwnd, const LPWSTR codepg, LPWSTR text, size_t 
 #   if defined(__InputKB_00000419)
     LPWSTR code = ((codepg == NULL) ? (LPWSTR)L"00000419" : codepg);
 #   elif defined(__InputKB_00010419)
-    LPWSTR code = ((codepg == NULL) ? (LPWSTR)L"00010419" : codepg);
+    LPWSTR code = ((codepg == NULL) ? const_cast<LPWSTR> (L"00010419") : codepg);
 #   else
     if (codepg == NULL)
         return;
@@ -381,7 +381,7 @@ BOOL DLL_EXPORT keySetText(HWND hwnd, const LPWSTR codepg, LPWSTR text)
     r = SendMessageTimeout(hwnd,
                            WM_SETTEXT,
                            0,
-                           (LPARAM)text,
+                           reinterpret_cast<LPARAM> (text),
                            SMTO_ABORTIFHUNG,
                            3000,
                            &ret

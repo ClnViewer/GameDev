@@ -54,8 +54,8 @@ static void __mouseClickAction(HWND hwnd, HWND mwnd, POINT *p, POINT *e, mouse_c
 
     long x = __MOUSE_CORD(p->x, e->x),
          y = __MOUSE_CORD(p->y, e->y),
-         px = (int)(x / 10),
-         py = (int)(y / 10),
+         px = static_cast<int> (x / 10),
+         py = static_cast<int> (y / 10),
          i = 1;
 
     /*

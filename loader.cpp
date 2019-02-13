@@ -32,7 +32,7 @@ static volatile const char VERSION[] =
 
 const char * DLL_EXPORT DllVersion(void)
 {
-    return (const char*)VERSION;
+    return const_cast<const char*>(VERSION);
 }
 
 #ifdef __cplusplus

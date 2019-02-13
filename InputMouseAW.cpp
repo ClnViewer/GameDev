@@ -108,8 +108,8 @@ static void __mouseClickAction(HWND hwnd, POINT *p, POINT *e, mouse_click_e ecli
         return;
 
     __mouseMove(&mi,
-                (int)(rect.left + __MOUSE_CORD(p->x, e->x)),
-                (int)(rect.top + __MOUSE_CORD(p->y, e->y))
+                static_cast<int> (rect.left + __MOUSE_CORD(p->x, e->x)),
+                static_cast<int> (rect.top + __MOUSE_CORD(p->y, e->y))
                );
     __mouseClick(&mi, eclick);
     Sleep(500);

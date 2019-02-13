@@ -45,7 +45,7 @@ double DLL_EXPORT bmpComparable(struct dataComparable *data)
         return 0.0;
     if (cmp == sz)
         return 100.0;
-    return ((double)cmp / ((double)sz / 100.0));
+    return (static_cast<double>(cmp) / (static_cast<double>(sz) / 100.0));
 }
 
 static bitPixel __PixelBlackWhite(bitPixel& pixel)
@@ -56,9 +56,9 @@ static bitPixel __PixelBlackWhite(bitPixel& pixel)
     bitPixel p;
     p.Red = p.Green = p.Blue = (
              (
-              ((unsigned)(0.299 * pixel.Red) > 126U) ||
-              ((unsigned)(0.587 * pixel.Green) > 126U) ||
-              ((unsigned)(0.114 * pixel.Blue) > 126U)
+              (static_cast<unsigned>(0.299 * pixel.Red) > 126U) ||
+              (static_cast<unsigned>(0.587 * pixel.Green) > 126U) ||
+              (static_cast<unsigned>(0.114 * pixel.Blue) > 126U)
              ) ?
                 static_cast<BYTE>(0xFF) : static_cast<BYTE>(0x0)
     );
