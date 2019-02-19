@@ -86,8 +86,8 @@ void DLL_EXPORT wndScreenSaverOff(void);
 
 #endif
 /*
-	Last Changed Rev: 920
-	Last Changed Date: 2019-02-18 11:38:14 +0400 (Mon, 18 Feb 2019)
+	Last Changed Rev: 928
+	Last Changed Date: 2019-02-19 08:44:04 +0400 (Tue, 19 Feb 2019)
  */
 
 
