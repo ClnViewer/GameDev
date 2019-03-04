@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<CodeBlocks_workspace_file>
-	<Workspace title="GameDevDllWorkSpace">
-		<Project filename="GameDevDll.cbp" />
-		<Project filename="GameDevDllTestC++/Test/GameDevDllTestC++.cbp" />
-	</Workspace>
-</CodeBlocks_workspace_file>
