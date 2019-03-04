@@ -7,8 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="..\..\_Bin\Debug\GameDevCoCCapture" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\_Bin\obj\Debug\" />
+				<Option output="../bin/Debug/GameDevCoCCapture" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option parameters="my.bmp" />
@@ -23,14 +23,12 @@
 					<Add option="-m32" />
 					<Add option="-luser32" />
 					<Add option="-lgdi32" />
-					<Add option="-LC:\__BuildSource\__SVN__\CoCAnnouncer2.0\_Bin\Debug" />
-					<Add option="-Wl,-rpath=C:\__BuildSource\__SVN__\CoCAnnouncer2.0\_Bin\Debug" />
-					<Add library="GameDev" />
+					<Add option="-Wl,-rpath=C:\__BuildSource\__TEST__\__COC__\GameDevDll\bin\Debug" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="..\..\_Bin\Release\GameDevCoCCapture" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\_Bin\obj\Release\" />
+				<Option output="../bin/Release/GameDevCoCCapture" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -45,8 +43,9 @@
 					<Add option="-m32" />
 					<Add option="-luser32" />
 					<Add option="-lgdi32" />
-					<Add option="-LC:\__BuildSource\__SVN__\CoCAnnouncer2.0\_Bin\Release" />
-					<Add option="-Wl,-rpath=C:\__BuildSource\__SVN__\CoCAnnouncer2.0\_Bin\Release" />
+					<Add option="-lgomp" />
+					<Add option="-LC:\__BuildSource\__SVN__\CoCAnnouncer\GameDevDll\bin\Release" />
+					<Add option="-Wl,-rpath=C:\__BuildSource\__SVN__\CoCAnnouncer\GameDevDll\bin\Release" />
 					<Add library="GameDev" />
 				</Linker>
 			</Target>

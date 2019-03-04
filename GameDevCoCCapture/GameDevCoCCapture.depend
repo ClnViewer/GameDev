@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1545599804 source:c:\__buildsource\__svn__\cocannouncer\gamedevdll\gamedevcoccapture\gamedevcoccapture.cpp
+	<windows.h>
+	"..\loader.h"
+	"..\Wnd.h"
+	"..\InputKey.h"
+	"..\InputMouse.h"
+	"..\BitMap.h"
+	<iostream>
+	<string>
+
+1540944762 c:\__buildsource\__svn__\cocannouncer\gamedevdll\loader.h
+	<windows.h>
+
+1541629722 c:\__buildsource\__svn__\cocannouncer\gamedevdll\wnd.h
+	"loader.h"
+
+1541914118 c:\__buildsource\__svn__\cocannouncer\gamedevdll\inputkey.h
+	"loader.h"
+
+1540952002 c:\__buildsource\__svn__\cocannouncer\gamedevdll\inputmouse.h
+	"loader.h"
+
+1541809416 c:\__buildsource\__svn__\cocannouncer\gamedevdll\bitmap.h
+	"loader.h"
+

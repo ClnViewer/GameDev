@@ -1,0 +1,11 @@
+K 10
+svn:ignore
+V 106
+.ignoresvn
+.git/
+*.sh
+GameLicDll/GameLicServer/bin/
+GameLicDll/GameLicServer/bin/Debug/GameLicServer.exe
+
+
+END

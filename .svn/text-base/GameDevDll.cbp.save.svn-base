@@ -12,11 +12,11 @@
 		</Option>
 		<Build>
 			<Target title="Debug">
-				<Option output="..\_Bin\Debug\GameDev" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\_Bin\obj\Debug\" />
+				<Option output="bin/Debug/GameDev" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option host_application="..\_Bin\Debug\GameDevDllTestC++.exe" />
+				<Option host_application="bin/Debug/GameDevDllTestC++.exe" />
 				<Option run_host_application_in_terminal="0" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
@@ -24,11 +24,8 @@
 					<Add option="-Wall" />
 					<Add option="-std=c++17" />
 					<Add option="-m32" />
-					<Add option="-fvisibility=hidden" />
-					<Add option="-fvisibility-inlines-hidden" />
 					<Add option="-g" />
 					<Add option="-fopenmp" />
-					<Add option="-Wold-style-cast" />
 					<Add option="-DBUILD_DLL" />
 					<Add option="-D__InputKB_00010419" />
 				</Compiler>
@@ -43,13 +40,18 @@
 					<Add option="-Wl,-rpath=./" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="lib /MACHINE:X86 /def:GameDev.def /OUT:..\_Bin\Debug\GameDev.lib" />
+					<Add before="cmd.exe /C del bin\Debug\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GUI\bin\Debug\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GameDataDll\bin\Debug\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Debug\GameDev.dll ..\GUI\bin\Debug\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Debug\GameDev.dll ..\GameDataDll\bin\Debug\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Debug\GameDev.dll ..\GameDataDll\bin\Debug\GameDev.dll" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
 			<Target title="Release">
-				<Option output="..\_Bin\Release\GameDev" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\_Bin\obj\Release\" />
+				<Option output="bin/Release/GameDev" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -60,10 +62,7 @@
 					<Add option="-Wall" />
 					<Add option="-std=c++17" />
 					<Add option="-m32" />
-					<Add option="-fvisibility=hidden" />
-					<Add option="-fvisibility-inlines-hidden" />
 					<Add option="-fopenmp" />
-					<Add option="-Wold-style-cast" />
 					<Add option="-DBUILD_DLL" />
 					<Add option="-D__InputKB_00010419" />
 				</Compiler>
@@ -79,10 +78,14 @@
 					<Add option="-Wl,-rpath=./" />
 				</Linker>
 				<ExtraCommands>
-					<Add before="cmd.exe /C del ..\_Bin\Publish\GameDev.dll" />
-					<Add after="C:\__Bin\upx.exe -9 ..\_Bin\Release\GameDev.dll" />
-					<Add after="cmd.exe /C copy ..\_Bin\Release\GameDev.dll ..\_Bin\Publish\GameDev.dll" />
-					<Add after="lib /MACHINE:X86 /def:GameDev.def /OUT:..\_Bin\Release\GameDev.lib" />
+					<Add before="cmd.exe /C del bin\Release\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GUI\bin\Release\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GUI\bin\Publish\GameDev.dll" />
+					<Add before="cmd.exe /C del ..\GameDataDll\bin\Release\GameDev.dll" />
+					<Add after="C:\__Bin\upx.exe -9 bin\Release\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Release\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GUI\bin\Publish\GameDev.dll" />
+					<Add after="cmd.exe /C copy bin\Release\GameDev.dll ..\GameDataDll\bin\Release\GameDev.dll" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -105,15 +108,15 @@
 		<Unit filename="loader.h" />
 		<Unit filename="version.h" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<AutoVersioning>
 				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />
 				<Settings autoincrement="1" date_declarations="1" use_define="1" update_manifest="0" do_auto_increment="1" ask_to_increment="0" language="C" svn="1" svn_directory="C:\__BuildSource\__TEST__\__COC__\GameDevDll\.svn" header_path="version.h" />
 				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="CHANGESLOG.txt" />
 				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="GMD" />
 			</AutoVersioning>
+			<code_completion />
+			<envvars />
+			<debugger />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

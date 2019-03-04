@@ -1,0 +1,136 @@
+#define _WIN32_WINNT 0x0501
+#include <windows.h>
+#include <exception>
+
+#include "..\\loader.h"
+#include "..\\Wnd.h"
+#include "..\\BitMap.h"
+#include "..\\InputKey.h"
+#include "..\\InputMouse.h"
+
+using namespace std;
+
+#include "GameDevClass.hpp"
+
+
+GameDev::GameDev (const LPWSTR wclass, const LPWSTR wname, const LPWSTR wmouse)
+{
+    try
+    {
+        if (!wclass)
+            throw new exception{"name window class empty"};
+
+        ZeroMemory(GameDev::codepage, sizeof(GameDev::codepage));
+        if (!(GameDev::hwnd = wndChildLastElement(NULL, wclass, wname)))
+            throw new exception{"active window not found"};
+
+        if ((wmouse) && (GameDev::hwnd))
+            if (!(GameDev::mwnd = wndChildTreeElement(GameDev::hwnd, wclass, wmouse)))
+                throw new exception{"active mouse window not found"};
+            else
+                GameDev::mwnd = nullptr;
+    }
+    catch(exception& e)
+    {
+        throw e;
+    }
+}
+GameDev::~GameDev ()
+{
+    hbmpFree(GameDev::hbmp);
+}
+bool GameDev::IsHandle()
+{
+    if (!GameDev::hwnd)
+        return false;
+    return true;
+}
+bool GameDev::BmpGrayscale (bool isBW)
+{
+    bool ret;
+
+    if (!GameDev::hbmp)
+        return false;
+
+    if (!(ret = hbmpGrayscale(GameDev::hbmp, isBW)))
+    {
+        DeleteObject(GameDev::hbmp);
+        GameDev::hbmp = NULL;
+    }
+    return ret;
+}
+bool GameDev::BmpEquals (struct dataComparable *data)
+{
+    double r = bmpComparable(data);
+    if (r < 98.0)
+        return false;
+    return true;
+}
+bool GameDev::BmpSave (const LPWSTR fname)
+{
+    if (!GameDev::hbmp)
+        return false;
+    return hbmpSave(GameDev::hbmp, fname);
+}
+bool GameDev::BmpCapture (POINT *point)
+{
+    if (
+        (!GameDev::hwnd) ||
+        (!IsWindow(GameDev::hwnd)) ||
+        (!wndActivateWindow(GameDev::hwnd))
+    )
+        return false;
+
+    if (GameDev::hbmp)
+        hbmpFree(GameDev::hbmp);
+
+    if (!(GameDev::hbmp = hbmpCaptureWindow(GameDev::hwnd, point)))
+        return false;
+    return true;
+}
+bool GameDev::MouseClickL (POINT *winr, POINT *eler)
+{
+    if (!GameDev::hwnd)
+        return false;
+    mouseLClickBW(GameDev::hwnd, GameDev::mwnd, winr, eler);
+    return true;
+}
+bool GameDev::MouseClickR (POINT *winr, POINT *eler)
+{
+    if (!GameDev::hwnd)
+        return false;
+    mouseRClickBW(GameDev::hwnd, GameDev::mwnd, winr, eler);
+    return true;
+}
+bool GameDev::MouseClickM (POINT *winr, POINT *eler)
+{
+    if (!GameDev::hwnd)
+        return false;
+    mouseMClickBW(GameDev::hwnd, GameDev::mwnd, winr, eler);
+    return true;
+}
+bool GameDev::KbdText (const LPWSTR cpage, LPWSTR str, size_t sz)
+{
+    LPWSTR code = ((!cpage) ? GameDev::codepage : cpage);
+    if (
+        (!GameDev::hwnd) ||
+        (!code)
+    )
+        return false;
+
+    keySendText(GameDev::hwnd, code, str, sz);
+    return true;
+}
+bool GameDev::KbdCodePage(const LPWSTR cpage)
+{
+    size_t sz;
+
+    if (
+        (!cpage) ||
+        (!(sz = wcslen(cpage))) ||
+        (!wcsncpy(GameDev::codepage, cpage, sz))
+    )
+        return false;
+    return true;
+}
+
