@@ -2,13 +2,13 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="GameDevCoCCaptureC++" />
+		<Option title="GameDevCoCCapture" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="..\..\_Bin\Debug\GameDevCoCCapture" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\_Bin\obj\Debug\" />
+				<Option output="../../_Bin/Debug/GameDevCoCCapture" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../_Bin/obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option parameters="my.bmp" />
@@ -29,8 +29,8 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="..\..\_Bin\Release\GameDevCoCCapture" prefix_auto="1" extension_auto="1" />
-				<Option object_output="..\..\_Bin\obj\Release\" />
+				<Option output="../../_Bin/Release/GameDevCoCCapture" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../../_Bin/obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
