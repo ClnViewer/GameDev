@@ -1,14 +1,14 @@
 10
 
 dir
-72
+83
 file:///home/admin/main_daemon/__SVN__/CoCAnnouncer2.0/GameDevDll/GameDevCoCCapture
 file:///home/admin/main_daemon/__SVN__/CoCAnnouncer2.0
 
 
 
-2019-03-12T19:18:47.039588Z
-72
+2019-03-15T23:16:53.257264Z
+83
 den68
 has-props
 
@@ -134,10 +134,10 @@ file
 
 
 
-2019-03-08T23:49:05.670996Z
-e3f4514bfdc38e95baa57e388bc211ea
-2019-03-08T23:49:04.967301Z
-65
+2019-03-15T23:16:53.489996Z
+0bf21647ed6f581c1c46429893a013ff
+2019-03-15T23:16:53.257264Z
+83
 den68
 
 
@@ -160,7 +160,7 @@ den68
 
 
 
-176
+178
 
 GameDevCoCCapture.layout
 file
