@@ -1,7 +1,7 @@
 10
 
 dir
-84
+85
 file:///home/admin/main_daemon/__SVN__/CoCAnnouncer2.0/GameDevDll/GameDevCoCCapture
 file:///home/admin/main_daemon/__SVN__/CoCAnnouncer2.0
 
@@ -25,6 +25,74 @@ has-props
 
 
 c4fbffac-efbf-4b96-87c3-9720cd5e4516
+
+GameDevCoCCapture.layout.save
+file
+
+
+
+
+2019-03-15T23:16:53.489996Z
+0bf21647ed6f581c1c46429893a013ff
+2019-03-15T23:16:53.257264Z
+83
+den68
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+178
+
+GameDevCoCCapture.layout
+file
+
+
+
+
+2019-03-12T19:18:47.345991Z
+0bf21647ed6f581c1c46429893a013ff
+2019-03-12T19:18:47.039588Z
+72
+den68
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+178
 
 GameDevCoCCapture.bmarks
 file
@@ -229,72 +297,4 @@ den68
 
 
 2014
-
-GameDevCoCCapture.layout.save
-file
-
-
-
-
-2019-03-15T23:16:53.489996Z
-0bf21647ed6f581c1c46429893a013ff
-2019-03-15T23:16:53.257264Z
-83
-den68
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-178
-
-GameDevCoCCapture.layout
-file
-
-
-
-
-2019-03-12T19:18:47.345991Z
-0bf21647ed6f581c1c46429893a013ff
-2019-03-12T19:18:47.039588Z
-72
-den68
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-178
 
