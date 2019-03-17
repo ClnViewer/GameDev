@@ -1,14 +1,14 @@
 10
 
 dir
-85
+86
 file:///home/admin/main_daemon/__SVN__/CoCAnnouncer2.0/GameDevDll/GameDevCoCCapture
 file:///home/admin/main_daemon/__SVN__/CoCAnnouncer2.0
 
 
 
-2019-03-15T23:16:53.257264Z
-83
+2019-03-17T00:51:05.630946Z
+86
 den68
 has-props
 
@@ -25,6 +25,40 @@ has-props
 
 
 c4fbffac-efbf-4b96-87c3-9720cd5e4516
+
+GameDevCoCCapture.cbp
+file
+
+
+
+
+2019-03-08T23:49:05.670996Z
+239e37f2e0af04abdc747ace14cab4fe
+2019-03-08T23:49:04.967301Z
+65
+den68
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2014
 
 GameDevCoCCapture.layout.save
 file
@@ -66,10 +100,10 @@ file
 
 
 
-2019-03-12T19:18:47.345991Z
-0bf21647ed6f581c1c46429893a013ff
-2019-03-12T19:18:47.039588Z
-72
+2019-03-17T00:51:06.076994Z
+e3f4514bfdc38e95baa57e388bc211ea
+2019-03-17T00:51:05.630946Z
+86
 den68
 
 
@@ -92,7 +126,7 @@ den68
 
 
 
-178
+176
 
 GameDevCoCCapture.bmarks
 file
@@ -100,10 +134,10 @@ file
 
 
 
-2019-03-12T19:18:47.346991Z
-5363567fe6f22bbbf25118af5ad71190
-2019-03-12T19:18:47.039588Z
-72
+2019-03-17T00:51:06.077994Z
+e5164ae842e458097b229664ab928e5a
+2019-03-17T00:51:05.630946Z
+86
 den68
 
 
@@ -126,7 +160,7 @@ den68
 
 
 
-147
+145
 
 GameDevCoCCapture.cpp.save
 file
@@ -263,38 +297,4 @@ den68
 
 
 2716
-
-GameDevCoCCapture.cbp
-file
-
-
-
-
-2019-03-08T23:49:05.670996Z
-239e37f2e0af04abdc747ace14cab4fe
-2019-03-08T23:49:04.967301Z
-65
-den68
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2014
 
